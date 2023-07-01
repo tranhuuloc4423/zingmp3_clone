@@ -1,25 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { Home, Public, Login } from "./containers/public/";
+import { Routes, Route } from "react-router-dom";
+import paths from "./ultis/paths";
+const { PUBLIC, HOME, LOGIN, STAR } = paths;
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <div className="App bg-slate-800 h-screen">
+            <Routes>
+                <Route path={PUBLIC} element={<Public />}>
+                    <Route path={HOME} element={<Home />} />
+                    <Route path={LOGIN} element={<Login />} />
+                </Route>
+            </Routes>
+        </div>
+    );
 }
 
 export default App;
