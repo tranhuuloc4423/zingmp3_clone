@@ -1,18 +1,23 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import { SidebarLeft, SidebarRight } from "../../components/";
+import { SidebarLeft, SidebarRight, Player } from "../../components/";
 
 const Public = () => {
     return (
-        <div className="w-full flex">
-            <div className="w-[240px] h-screen bg-[#1b2639]">
-                <SidebarLeft />
+        <div className="flex flex-col h-screen">
+            <div className="w-full flex flex-auto">
+                <div className="w-[240px] h-full bg-main-100">
+                    <SidebarLeft />
+                </div>
+                <div className="flex-1 bg-main-200">
+                    <Outlet />
+                </div>
+                <div className="w-[330px] hidden 1600:block animate-slide-left">
+                    <SidebarRight />
+                </div>
             </div>
-            <div className="flex-1 bg-[#0f1a2e]">
-                <Outlet />
-            </div>
-            <div className="w-[239px]">
-                <SidebarRight />
+            <div className="flex-none">
+                <Player />
             </div>
         </div>
     );

@@ -1,7 +1,6 @@
 import icons from "./icons";
 
 const {
-    RiCompassDiscoverLine,
     BiDoughnutChart,
     MdOutlineLibraryMusic,
     TbChartArcs,

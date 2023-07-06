@@ -10,4 +10,8 @@
     .sidebarLeftNotActive {
         @apply py-2 px-[25px] font-semibold text-[14px] flex gap-3 items-center text-[#dadada];
     }
+
+    .hover-icon {
+        @apply hover:bg-slate-700 p-[8px] rounded-[50%] text-white cursor-pointer;
+    }
 }
