@@ -7,12 +7,12 @@ import {
     MdSkipNext,
     MdSkipPrevious,
 } from "react-icons/md";
-import { PiRadioBold } from "react-icons/pi";
+import { PiRadioBold, PiMusicNotesSimpleDuotone } from "react-icons/pi";
 import { HiArrowLongLeft, HiArrowLongRight } from "react-icons/hi2";
 import { AiOutlineSearch, AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { BsThreeDots, BsFillPauseFill } from "react-icons/bs";
 import { LuRepeat } from "react-icons/lu";
-import { FaPlay, FaRandom } from "react-icons/fa";
+import { FaPlay, FaRandom, FaSort } from "react-icons/fa";
 
 const icons = {
     RiCompassDiscoverLine,
@@ -33,6 +33,8 @@ const icons = {
     MdSkipPrevious,
     MdSkipNext,
     BsFillPauseFill,
+    FaSort,
+    PiMusicNotesSimpleDuotone,
 };
 
 export default icons;

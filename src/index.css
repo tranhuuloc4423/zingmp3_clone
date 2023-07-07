@@ -14,4 +14,13 @@
     .hover-icon {
         @apply hover:bg-slate-700 p-[8px] rounded-[50%] text-white cursor-pointer;
     }
+
+    .media-item {
+        @apply flex items-center text-blur-100 text-xs p-[10px] border-b border-main rounded-md;
+    }
+}
+
+@font-face {
+    font-family: "Inter", sans-serif;
+    src: url("https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,500;0,600;0,700;0,800;1,600;1,700&family=Inter:wght@300;400;500;600;700;800&family=Nunito:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Quicksand:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&family=Rubik:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Sora:wght@500;600;700;800&display=swap");
 }

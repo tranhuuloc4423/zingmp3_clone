@@ -3,6 +3,9 @@ module.exports = {
     content: ["./src/**/*.{js,jsx,ts,tsx}"],
     theme: {
         extend: {
+            fontFamily: {
+                sans: ["'Inter'", "san-serif"],
+            },
             keyframes: {
                 "slide-right": {
                     "0%": {
@@ -45,6 +48,9 @@ module.exports = {
                     "slide-left2 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;",
             },
             colors: {
+                blur: {
+                    100: "#ffffff80",
+                },
                 main: {
                     100: "#1b2639",
                     200: "#0f1a2e",
@@ -53,6 +59,9 @@ module.exports = {
                 hightlight: {
                     100: "#158370",
                 },
+            },
+            borderColor: {
+                main: "#ffffff0d",
             },
         },
         screens: {

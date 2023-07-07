@@ -23,14 +23,14 @@ const Player = () => {
     useEffect(() => {
         const fetchDetailSong = async () => {
             const [res1, res2] = await Promise.all([
-                apis.getDetailSong(currSongId),
-                apis.getSong(currSongId),
+                apis.apiGetDetailSong(currSongId),
+                apis.apiGetSong(currSongId),
             ]);
-            if (res1.status === 200) {
+            if (res1.data.err === 0) {
                 console.log(res1);
                 setSonginfo(res1.data.data);
             }
-            if (res2.status === 200) {
+            if (res2.data.err === 0) {
                 console.log(res2);
                 setSource(res2.data?.data["128"]);
             }
@@ -53,7 +53,7 @@ const Player = () => {
                 />
                 <div>
                     <h4 className="text-white text-sm">{songinfo?.title}</h4>
-                    <p className="text-[#ffffff80] text-xs">
+                    <p className="text-blur-100 text-xs">
                         {songinfo?.artistsNames}
                     </p>
                 </div>
