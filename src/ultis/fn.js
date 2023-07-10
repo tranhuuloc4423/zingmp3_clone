@@ -1,3 +1,4 @@
+import moment from 'moment';
 export const getArrSlider = (start, end, number) => {
     const limit = start > end ? number : end;
     let output = [];
@@ -10,4 +11,8 @@ export const getArrSlider = (start, end, number) => {
         }
     }
     return output;
+};
+
+export const formatSecond = (seconds, form = 'mm:ss') => {
+    return moment.utc(seconds * 1000).format(form);
 };
