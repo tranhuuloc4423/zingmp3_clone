@@ -1,5 +1,5 @@
-import actionTypes from "./actionTypes";
-import * as apis from "../../../apis";
+import actionTypes from './actionTypes';
+import * as apis from '../../../apis';
 
 export const getHome = () => async (dispatch) => {
     try {
@@ -22,3 +22,8 @@ export const getHome = () => async (dispatch) => {
         });
     }
 };
+
+export const closeSidebar = (flag) => ({
+    type: actionTypes.CLOSE_SIDEBAR,
+    flag,
+});

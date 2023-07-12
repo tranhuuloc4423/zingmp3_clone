@@ -5,6 +5,8 @@ const actionTypes = {
     PLAY: 'PLAY',
     IS_ALBUM: 'IS_ALBUM',
     PLAYLIST: 'PLAYLIST',
+    CLOSE_SIDEBAR: 'CLOSE_SIDEBAR',
+    SET_AUDIO: 'SET_AUDIO',
 };
 
 export default actionTypes;

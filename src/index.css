@@ -16,11 +16,182 @@
     }
 
     .media-item {
-        @apply flex items-center text-blur-100 text-xs p-[10px] border-b border-main rounded-md;
+        @apply flex items-center text-blur-100 text-xs p-[10px] cursor-pointer border-b border-main rounded-md hover:bg-overlay-300;
     }
 }
 
 @font-face {
-    font-family: "Inter", sans-serif;
-    src: url("https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,500;0,600;0,700;0,800;1,600;1,700&family=Inter:wght@300;400;500;600;700;800&family=Nunito:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Quicksand:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&family=Rubik:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Sora:wght@500;600;700;800&display=swap");
+    font-family: 'Inter', sans-serif;
+    src: url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,500;0,600;0,700;0,800;1,600;1,700&family=Inter:wght@300;400;500;600;700;800&family=Nunito:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Quicksand:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&family=Rubik:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Sora:wght@500;600;700;800&display=swap');
+}
+
+.media-item:hover .media-item-play {
+    display: block;
+}
+
+.progress-song:hover span {
+    width: 16px;
+    height: 16px;
+}
+
+.progress-song-overlay {
+    background: linear-gradient(
+        to right,
+        rgba(246, 114, 128, 1) 0%,
+        rgba(192, 108, 132, 1) 50%,
+        rgba(53, 92, 125, 1) 100%
+    );
+}
+
+input[type='range'] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 150px;
+    background-color: transparent;
+    height: 12px;
+
+    &:focus {
+        outline-color: #f8b195;
+    }
+}
+
+input[type='range']::-webkit-slider-runnable-track {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 3px;
+    background: rgb(246, 114, 128);
+    background: -webkit-linear-gradient(
+        left,
+        rgba(246, 114, 128, 1) 0%,
+        rgba(192, 108, 132, 1) 50%,
+        rgba(53, 92, 125, 1) 100%
+    );
+    background: linear-gradient(
+        to right,
+        rgba(246, 114, 128, 1) 0%,
+        rgba(192, 108, 132, 1) 50%,
+        rgba(53, 92, 125, 1) 100%
+    );
+    filter: progid:DXImageTransform.Microsoft.gradient(
+      startColorstr="#f67280",
+      endColorstr="#355c7d",
+      GradientType=1
+    );
+}
+
+input[type='range']::-moz-range-track {
+    -moz-appearance: none;
+    appearance: none;
+    height: 3px;
+    background: rgb(246, 114, 128);
+    background: -moz-linear-gradient(
+        left,
+        rgba(246, 114, 128, 1) 0%,
+        rgba(192, 108, 132, 1) 50%,
+        rgba(53, 92, 125, 1) 100%
+    );
+    background: linear-gradient(
+        to right,
+        rgba(246, 114, 128, 1) 0%,
+        rgba(192, 108, 132, 1) 50%,
+        rgba(53, 92, 125, 1) 100%
+    );
+    filter: progid:DXImageTransform.Microsoft.gradient(
+      startColorstr="#f67280",
+      endColorstr="#355c7d",
+      GradientType=1
+    );
+}
+
+input[type='range']::-ms-track {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    height: 3px;
+    background: rgb(246, 114, 128);
+    background: -moz-linear-gradient(
+        left,
+        rgba(246, 114, 128, 1) 0%,
+        rgba(192, 108, 132, 1) 50%,
+        rgba(53, 92, 125, 1) 100%
+    );
+    background: -webkit-linear-gradient(
+        left,
+        rgba(246, 114, 128, 1) 0%,
+        rgba(192, 108, 132, 1) 50%,
+        rgba(53, 92, 125, 1) 100%
+    );
+    background: linear-gradient(
+        to right,
+        rgba(246, 114, 128, 1) 0%,
+        rgba(192, 108, 132, 1) 50%,
+        rgba(53, 92, 125, 1) 100%
+    );
+    filter: progid:DXImageTransform.Microsoft.gradient(
+      startColorstr="#f67280",
+      endColorstr="#355c7d",
+      GradientType=1
+    );
+}
+
+input[type='range']::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    border: 2px solid #f8b195;
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+    position: relative;
+    bottom: 8px;
+    background: #222 url('http://codemenatalie.com/wp-content/uploads/2019/09/slider-thumb.png')
+        center no-repeat;
+    background-size: 50%;
+    box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.4);
+    cursor: grab;
+
+    &:active {
+        cursor: grabbing;
+    }
+}
+
+input[type='range']::-moz-range-thumb {
+    -moz-appearance: none;
+    appearance: none;
+    border: 2px solid #f8b195;
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+    position: relative;
+    bottom: 8px;
+    background: #222 url('http://codemenatalie.com/wp-content/uploads/2019/09/slider-thumb.png')
+        center no-repeat;
+    background-size: 50%;
+    box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.4);
+    cursor: grab;
+
+    &:active {
+        cursor: grabbing;
+    }
+}
+
+input[type='range']::-ms-thumb {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: 2px solid #f8b195;
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+    position: relative;
+    bottom: 8px;
+    background: #222 url('http://codemenatalie.com/wp-content/uploads/2019/09/slider-thumb.png')
+        center no-repeat;
+    background-size: 50%;
+    box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.4);
+    cursor: grab;
+
+    &:active {
+        cursor: grabbing;
+    }
 }

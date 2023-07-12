@@ -76,7 +76,7 @@ const Slider = () => {
     };
 
     return (
-        <div className="flex justify-between items-center gap-8 w-full overflow-hidden px-[59px] pt-12">
+        <div className="flex justify-between items-center gap-8 w-full overflow-hidden pt-12">
             {banner?.map((item, index) => (
                 <img
                     key={item.encodeId}

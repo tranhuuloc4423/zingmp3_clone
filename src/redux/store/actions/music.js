@@ -1,5 +1,5 @@
 import actionTypes from './actionTypes';
-import * as apis from '../../../apis';
+// import * as apis from '../../../apis';
 
 export const setCurrSong = (id) => ({
     type: actionTypes.SET_CURR_SONG,
@@ -19,6 +19,11 @@ export const playAlbum = (flag) => ({
 export const setPlaylist = (playlist) => ({
     type: actionTypes.PLAYLIST,
     playlist,
+});
+
+export const setAudio = (audio) => ({
+    type: actionTypes.SET_AUDIO,
+    audio,
 });
 
 // export const fetchDataPlaylist = (id) => async (dispatch) => {

@@ -16,3 +16,7 @@ export const getArrSlider = (start, end, number) => {
 export const formatSecond = (seconds, form = 'mm:ss') => {
     return moment.utc(seconds * 1000).format(form);
 };
+
+export const handleStyleProgress = (ref, value) => {
+    ref.current.style = `right: ${value}%`;
+};

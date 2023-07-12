@@ -1,13 +1,13 @@
-import React from "react";
-import logo from "../assets/logo.svg";
-import { sidebarMenu } from "../ultis/menu";
-import { NavLink, useNavigate } from "react-router-dom";
-import path from "../ultis/paths";
+import React from 'react';
+import logo from '../assets/logo.svg';
+import { sidebarMenu } from '../ultis/menu';
+import { NavLink, useNavigate } from 'react-router-dom';
+import path from '../ultis/paths';
 
 const SidebarLeft = () => {
     const navigate = useNavigate();
     return (
-        <div>
+        <div className="fixed h-screen bg-main-100 w-[12%]">
             <div
                 onClick={() => navigate(path.HOME)}
                 className="w-full h-[70px] py-[15px] pr-[25px] pl-7 flex justify-start items-center"
@@ -21,9 +21,7 @@ const SidebarLeft = () => {
                         key={item.path}
                         end={item.end}
                         className={({ isActive }) =>
-                            isActive
-                                ? "sidebarLeftActive"
-                                : "sidebarLeftNotActive"
+                            isActive ? 'sidebarLeftActive' : 'sidebarLeftNotActive'
                         }
                     >
                         {item.icon}

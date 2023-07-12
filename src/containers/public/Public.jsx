@@ -1,27 +1,23 @@
-import React from "react";
-import { Outlet } from "react-router-dom";
-import { SidebarLeft, SidebarRight, Player, Header } from "../../components/";
+import React from 'react';
+import { Outlet } from 'react-router-dom';
+import { SidebarLeft, SidebarRight, Player, Header } from '../../components/';
+import { useSelector } from 'react-redux';
 
 const Public = () => {
-  return (
-    <div className="flex flex-col h-screen">
-      <div className="w-full flex flex-auto">
-        <div className="w-[240px] bg-main-100">
-          <SidebarLeft />
+    const { closeSidebar } = useSelector((state) => state.app);
+    return (
+        <div className="flex flex-col h-screen bg-main-200">
+            <div className="w-full flex flex-1">
+                <SidebarLeft />
+                <div className="flex-1 bg-main-200 px-[59px] ml-[240px]">
+                    <Header />
+                    <Outlet />
+                </div>
+                {!closeSidebar && <SidebarRight />}
+            </div>
+            <Player />
         </div>
-        <div className="flex-1 bg-main-200 px-[59px]">
-          <Header />
-          <Outlet />
-        </div>
-        <div className="w-[330px] hidden 1600:block animate-slide-left">
-          <SidebarRight />
-        </div>
-      </div>
-      <div className="flex-none">
-        <Player />
-      </div>
-    </div>
-  );
+    );
 };
 
 export default Public;

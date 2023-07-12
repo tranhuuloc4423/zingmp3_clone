@@ -5,6 +5,7 @@ const initState = {
     isPlaying: false,
     playAlbum: false,
     playlist: null,
+    audio: new Audio(),
 };
 
 const musicReducer = (state = initState, action) => {
@@ -28,6 +29,11 @@ const musicReducer = (state = initState, action) => {
             return {
                 ...state,
                 playlist: action.playlist || null,
+            };
+        case actionTypes.SET_AUDIO:
+            return {
+                ...state,
+                audio: action.audio,
             };
         default:
             return state;
