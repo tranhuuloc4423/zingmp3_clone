@@ -77,15 +77,19 @@ const Slider = () => {
 
     return (
         <div className="flex justify-between items-center gap-8 w-full overflow-hidden pt-12">
-            {banner?.map((item, index) => (
-                <img
-                    key={item.encodeId}
-                    src={item.banner}
-                    onClick={() => handleClickBanner(item)}
-                    className={`slider-item flex-1 object-contain w-[30%] rounded-lg `}
-                    alt={'banner'}
-                />
-            ))}
+            {banner?.map((item, index) => {
+                if (index < 3) {
+                    return (
+                        <img
+                            key={item.encodeId}
+                            src={item.banner}
+                            onClick={() => handleClickBanner(item)}
+                            className={`slider-item flex-1 object-contain w-[30%] rounded-lg `}
+                            alt={'banner'}
+                        />
+                    );
+                }
+            })}
         </div>
     );
 };

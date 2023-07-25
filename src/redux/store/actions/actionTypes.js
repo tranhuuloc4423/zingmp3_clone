@@ -7,6 +7,8 @@ const actionTypes = {
     PLAYLIST: 'PLAYLIST',
     CLOSE_SIDEBAR: 'CLOSE_SIDEBAR',
     SET_AUDIO: 'SET_AUDIO',
+    IS_LOADING_DATA: 'IS_LOADING_DATA',
+    IS_LOADING_SONG: 'IS_LOADING_SONG',
 };
 
 export default actionTypes;

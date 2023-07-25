@@ -27,3 +27,8 @@ export const closeSidebar = (flag) => ({
     type: actionTypes.CLOSE_SIDEBAR,
     flag,
 });
+
+export const setLoadingData = (flag) => ({
+    type: actionTypes.IS_LOADING_DATA,
+    flag,
+});

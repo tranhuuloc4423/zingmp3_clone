@@ -9,3 +9,7 @@ export { default as Playlist } from './Playlist';
 export { default as MediaItem } from './MediaItem';
 export { default as Section } from './Section';
 export { default as SectionItem } from './SectionItem';
+export { default as SongInfo } from './SongInfo';
+export { default as NewRelease } from './NewRelease';
+export { default as Button } from './Button';
+export { default as ChartSection } from './ChartSection';

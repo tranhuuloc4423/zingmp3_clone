@@ -6,6 +6,7 @@ const initState = {
     playAlbum: false,
     playlist: null,
     audio: new Audio(),
+    isLoadingSong: false,
 };
 
 const musicReducer = (state = initState, action) => {
@@ -34,6 +35,11 @@ const musicReducer = (state = initState, action) => {
             return {
                 ...state,
                 audio: action.audio,
+            };
+        case actionTypes.IS_LOADING_SONG:
+            return {
+                ...state,
+                isLoadingSong: action.flag,
             };
         default:
             return state;

@@ -26,6 +26,11 @@ export const setAudio = (audio) => ({
     audio,
 });
 
+export const setLoadingSong = (flag) => ({
+    type: actionTypes.IS_LOADING_SONG,
+    flag,
+});
+
 // export const fetchDataPlaylist = (id) => async (dispatch) => {
 //     try {
 //         const res = await apis.apiGetDetailPlaylist(id);

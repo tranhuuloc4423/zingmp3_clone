@@ -7,7 +7,7 @@ import path from '../ultis/paths';
 const SidebarLeft = () => {
     const navigate = useNavigate();
     return (
-        <div className="fixed h-screen bg-main-100 w-[12%]">
+        <div className="h-full bg-main-100 w-[240px]">
             <div
                 onClick={() => navigate(path.HOME)}
                 className="w-full h-[70px] py-[15px] pr-[25px] pl-7 flex justify-start items-center"
