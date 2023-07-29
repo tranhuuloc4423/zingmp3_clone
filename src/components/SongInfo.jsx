@@ -3,13 +3,22 @@ import icons from '../ultis/icons';
 import { AudioLoading, SongLoading } from './';
 import { useSelector, useDispatch } from 'react-redux';
 import * as actions from '../redux/store/actions';
+import { stringsLimit } from '../ultis/fn';
 
 import moment from 'moment';
 import 'moment/locale/vi';
 
 const { PiMusicNotesSimpleDuotone, TbPlayerPlayFilled } = icons;
 
-const SongInfo = ({ data, releaseDate, thumbsize, isAlbum, styles }) => {
+const SongInfo = ({
+    data,
+    releaseDate,
+    thumbsize,
+    isAlbum,
+    styles,
+    bgActive = 'bg-main-0',
+    prefixInfo,
+}) => {
     const { thumbnail, title, artistsNames, encodeId } = data;
     const { isPlaying, currSongId, audio, isLoadingSong } = useSelector((state) => state.music);
     const dispatch = useDispatch();
@@ -19,12 +28,13 @@ const SongInfo = ({ data, releaseDate, thumbsize, isAlbum, styles }) => {
             audio.pause();
             dispatch(actions.setCurrSong(encodeId));
             dispatch(actions.play(true));
+            dispatch(actions.setRecentSong(data));
         }
     };
     return (
         <div
             className={`${styles ? styles : 'media-item gap-[10px] flex-auto z-10'} ${
-                activeSong && 'bg-main-0'
+                activeSong && bgActive
             } ${!isAlbum && 'p-[10px]'}`}
             onClick={handleClick}
         >
@@ -36,7 +46,7 @@ const SongInfo = ({ data, releaseDate, thumbsize, isAlbum, styles }) => {
                 <img src={thumbnail} alt="thumbnail" className="w-full object-contain " />
                 <span className="absolute">
                     {activeSong && isPlaying ? (
-                        <AudioLoading size={20} color={'#9b4de0'} />
+                        <AudioLoading size={20} />
                     ) : (
                         <TbPlayerPlayFilled
                             size={20}
@@ -47,8 +57,11 @@ const SongInfo = ({ data, releaseDate, thumbsize, isAlbum, styles }) => {
                 </span>
             </div>
             <div className="flex flex-col gap-1">
-                <h5 className="text-white text-sm font-semibold">{title}</h5>
-                <p className="text-blur-100">{artistsNames}</p>
+                {prefixInfo && <span className="text-xs text-blur-100">{prefixInfo}</span>}
+                <h5 className="text-white text-sm font-semibold">
+                    {title && stringsLimit(title, 6)}
+                </h5>
+                <p className="text-blur-100">{artistsNames && stringsLimit(artistsNames, 5)}</p>
                 {releaseDate && (
                     <span className="text-xs text-blur-100">
                         {moment(releaseDate * 1000).fromNow()}

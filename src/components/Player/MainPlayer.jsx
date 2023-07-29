@@ -1,42 +1,44 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, memo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import * as actions from '../../redux/store/actions';
 import { formatSecond, handleStyleProgress } from '../../ultis/fn';
 import icons from '../../ultis/icons';
 import { SongLoading } from '../Loading';
+import { toast } from 'react-toastify';
 
 const { FaRandom, MdSkipPrevious, MdSkipNext, BsFillPauseFill, LuRepeat, TbPlayerPlayFilled } =
     icons;
-const MainPlayer = ({ songinfo, thumbRef }) => {
-    const { currSongId, isPlaying, playlist, audio, isLoadingSong } = useSelector(
+const MainPlayer = ({ thumbRef }) => {
+    const { currSongId, isPlaying, playlist, audio, isLoadingSong, currSongData } = useSelector(
         (state) => state.music
     );
+
+    const playlistSong = playlist?.song?.items;
     const [currSec, setCurrSec] = useState(0);
     const [isShuffle, setIsShuffle] = useState(false);
     const [isRepeat, setIsRepeat] = useState(false);
     const progressId = useRef();
     const trackRef = useRef();
     const dispatch = useDispatch();
-
     const handlePlaylist = (value) => {
         audio.pause();
-        if (playlist) {
+        if (playlistSong) {
             let curretSongIndex;
-            playlist.forEach((item, index) => {
+            playlistSong?.forEach((item, index) => {
                 if (item.encodeId === currSongId) curretSongIndex = index;
             });
-            dispatch(actions.setCurrSong(playlist[curretSongIndex + value].encodeId));
+            dispatch(actions.setCurrSong(playlistSong[curretSongIndex + value]?.encodeId));
             dispatch(actions.play(true));
         }
     };
 
     const handleProgress = () => {
         progressId.current = setInterval(() => {
-            let percent = Math.round((audio.currentTime * 10000) / songinfo.duration) / 100;
+            let percent = Math.round((audio.currentTime * 10000) / currSongData?.duration) / 100;
             let progress = 100 - percent;
             handleStyleProgress(thumbRef, progress);
             setCurrSec(Math.round(audio.currentTime));
-        }, 200);
+        }, 1000);
     };
 
     useEffect(() => {
@@ -67,7 +69,7 @@ const MainPlayer = ({ songinfo, thumbRef }) => {
         const percent = Math.round(((e.clientX - trackRect.left) * 10000) / trackRect.width) / 100;
         let progress = 100 - percent;
         handleStyleProgress(thumbRef, progress);
-        audio.currentTime = (percent * songinfo.duration) / 100;
+        audio.currentTime = (percent * currSongData?.duration) / 100;
         setCurrSec(audio.currentTime);
     };
     const handlePrevSong = () => {
@@ -78,8 +80,8 @@ const MainPlayer = ({ songinfo, thumbRef }) => {
     };
 
     const handleShuffle = () => {
-        const randomIndex = Math.round(Math.random() * playlist?.length) - 1;
-        dispatch(actions.setCurrSong(playlist[randomIndex]?.encodeId));
+        const randomIndex = Math.round(Math.random() * playlistSong?.length) - 1;
+        dispatch(actions.setCurrSong(playlistSong[randomIndex]?.encodeId));
         dispatch(actions.play(true));
     };
 
@@ -93,7 +95,6 @@ const MainPlayer = ({ songinfo, thumbRef }) => {
             audio.play();
         }
     };
-
     return (
         <>
             <div className="flex gap-8 items-center">
@@ -109,7 +110,7 @@ const MainPlayer = ({ songinfo, thumbRef }) => {
                 </span>
                 <span
                     onClick={handlePrevSong}
-                    className={`${!playlist ? 'text-gray-500' : 'hover-icon'}`}
+                    className={`${!playlistSong ? 'text-gray-500' : 'hover-icon'}`}
                 >
                     <MdSkipPrevious size={24} />
                 </span>
@@ -133,7 +134,7 @@ const MainPlayer = ({ songinfo, thumbRef }) => {
                 </span>
                 <span
                     onClick={handleNextSong}
-                    className={`${!playlist ? 'text-gray-500' : 'hover-icon'}`}
+                    className={`${!playlistSong ? 'text-gray-500' : 'hover-icon'}`}
                 >
                     <MdSkipNext size={24} />
                 </span>
@@ -162,10 +163,10 @@ const MainPlayer = ({ songinfo, thumbRef }) => {
                         <span className="absolute w-3 h-3 right-[-6px] top-1/2 translate-y-[-50%] bg-red-400 rounded-full"></span>
                     </div>
                 </div>
-                <span className="w-8 mx-1">{formatSecond(songinfo?.duration)}</span>
+                <span className="w-8 mx-1">{formatSecond(currSongData?.duration)}</span>
             </div>
         </>
     );
 };
 
-export default MainPlayer;
+export default memo(MainPlayer);

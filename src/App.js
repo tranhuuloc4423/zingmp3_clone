@@ -1,4 +1,5 @@
 import { Home, Public, Login, Album, WeekRank, ZingChart } from './containers/public/';
+import { SearchMain, SearchSongs, SearchAll } from './components/Search/';
 import { Routes, Route } from 'react-router-dom';
 import paths from './ultis/paths';
 import { useEffect } from 'react';
@@ -15,6 +16,9 @@ const {
     PLAYLIST__TITLE__ID,
     WEEKRANK__TITLE_ID,
     ZING__CHART,
+    SEARCH,
+    ALL,
+    SONG,
 } = paths;
 
 function App() {
@@ -34,6 +38,10 @@ function App() {
                         <Route path={PLAYLIST__TITLE__ID} element={<Album />} />
                         <Route path={WEEKRANK__TITLE_ID} element={<WeekRank />} />
                         <Route path={ZING__CHART} element={<ZingChart />} />
+                        <Route path={SEARCH} element={<SearchMain />}>
+                            <Route path={ALL} element={<SearchAll />} />
+                            <Route path={SONG} element={<SearchSongs />} />
+                        </Route>
                     </Route>
                 </Routes>
             </div>

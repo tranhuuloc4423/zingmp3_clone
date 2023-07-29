@@ -7,8 +7,9 @@ import { useSelector } from 'react-redux';
 
 const { FaSort } = icons;
 
-const Playlist = ({ total, totalDuration }) => {
+const Playlist = () => {
     const { playlist } = useSelector((state) => state.music);
+    const song = playlist?.song;
     return (
         <div className="flex flex-col h-full">
             <header className="flex items-center uppercase py-2 text-blur-100 text-xs font-semibold">
@@ -20,15 +21,15 @@ const Playlist = ({ total, totalDuration }) => {
                 <div>Thời gian</div>
             </header>
             <Scrollbars autoHide style={{ width: '100%', height: '80%' }} className="pr-2">
-                {playlist?.map((item) => (
+                {song?.items.map((item) => (
                     <MediaItem key={item?.encodeId} songData={item} isAlbum />
                 ))}
             </Scrollbars>
 
             <div className="flex items-center gap-2 text-sm text-blur-100 lowercase mt-3">
-                <span>{total} Bài hát</span>
+                <span>{song?.total} Bài hát</span>
                 <span>•</span>
-                <span>{moment.utc(totalDuration * 1000).format('h [giờ] m [phút]')}</span>
+                <span>{moment.utc(song?.totalDuration * 1000).format('h [giờ] m [phút]')}</span>
             </div>
         </div>
     );

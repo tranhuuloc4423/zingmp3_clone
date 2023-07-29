@@ -9,6 +9,8 @@ import { BsThreeDots, BsFillPauseFill, BsMusicNoteList } from 'react-icons/bs';
 import { LuRepeat } from 'react-icons/lu';
 import { FaRandom, FaSort } from 'react-icons/fa';
 import { GoPlay } from 'react-icons/go';
+import { TfiAlarmClock } from 'react-icons/tfi';
+import { IoTrashBin } from 'react-icons/io5';
 
 const icons = {
     RiCompassDiscoverLine,
@@ -37,6 +39,8 @@ const icons = {
     TbVolume3,
     TbVolume,
     AiFillPlayCircle,
+    TfiAlarmClock,
+    IoTrashBin,
 };
 
 export default icons;

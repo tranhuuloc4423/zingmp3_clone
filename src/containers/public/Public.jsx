@@ -10,7 +10,7 @@ const Public = () => {
         <div className="flex flex-col h-screen bg-main-200">
             <div className="w-full flex flex-1">
                 <SidebarLeft />
-                <div className="flex-1 flex flex-col bg-main-200 px-[59px]">
+                <div className="flex-1 flex flex-col bg-main-200">
                     <Header />
                     <Scrollbars style={{ width: '100%', height: '100%' }} autoHide>
                         <Outlet />

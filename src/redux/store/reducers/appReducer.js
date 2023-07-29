@@ -2,6 +2,7 @@ import actionTypes from '../actions/actionTypes';
 
 const initState = {
     banner: [],
+    recentAlbums: [],
     hEditorTheme: {},
     hEditorTheme2: {},
     hEditorTheme3: {},
@@ -47,6 +48,22 @@ const appReducer = (state = initState, action) => {
             return {
                 ...state,
                 isLoadingData: action.flag,
+            };
+        case actionTypes.SET_RECENT_ALBUMS:
+            let albums = state.recentAlbums;
+            const albumIdentical = albums?.find((item) => item.encodeId === action.data?.encodeId);
+            if (action.data) {
+                if (albumIdentical) {
+                    albums = albums?.filter((item) => item !== albumIdentical);
+                }
+                if (albums?.length >= 5) {
+                    albums?.pop();
+                }
+                albums = [action.data, ...albums];
+            }
+            return {
+                ...state,
+                recentAlbums: albums,
             };
         default:
             return state;

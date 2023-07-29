@@ -1,33 +1,28 @@
 import React from 'react';
-import { Slider, Section, NewRelease, ChartSection } from '../../components';
+import { Slider, Section, NewRelease, ChartSection, ChartBanner } from '../../components';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 const Home = () => {
-    const { hEditorTheme, hEditorTheme2, hEditorTheme3, hEditorTheme4, hArtistTheme, weekChart } =
-        useSelector((state) => state.app);
-    console.log(weekChart);
+    const {
+        hEditorTheme,
+        hEditorTheme2,
+        hEditorTheme3,
+        hEditorTheme4,
+        hArtistTheme,
+        recentAlbums,
+    } = useSelector((state) => state.app);
     return (
-        <div className="overflow-y-auto flex flex-col">
+        <div className="overflow-y-auto flex flex-col px-[59px]">
             <Slider />
-            <Section data={hEditorTheme} />
+            <Section data={recentAlbums} title={'Gần đây'} />
+            <Section data={hEditorTheme?.items} title={hEditorTheme?.title} />
             <NewRelease />
-            <Section data={hEditorTheme2} />
-            <Section data={hEditorTheme3} />
-            <Section data={hEditorTheme4} />
-            <Section data={hArtistTheme} />
+            <Section data={hEditorTheme2?.items} title={hEditorTheme2?.title} />
+            <Section data={hEditorTheme3?.items} title={hEditorTheme3?.title} />
+            <Section data={hEditorTheme4?.items} title={hEditorTheme4?.title} />
+            <Section data={hArtistTheme?.items} title={hArtistTheme?.title} />
             <ChartSection />
-            <div className="flex items-center w-full mt-12 gap-8">
-                {weekChart?.map((item) => (
-                    <Link to={item?.link?.split('.')[0]} key={item?.link} className="flex-1">
-                        <img
-                            src={item?.cover}
-                            alt="cover"
-                            className="w-full rounded-md object-cover"
-                        />
-                    </Link>
-                ))}
-            </div>
+            <ChartBanner />
             <div className="h-[500px]"></div>
         </div>
     );

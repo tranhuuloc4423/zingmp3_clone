@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import * as apis from '../../apis/';
@@ -10,7 +10,6 @@ import MainPlayer from './MainPlayer';
 
 const Player = () => {
     const { currSongId, audio } = useSelector((state) => state.music);
-    const [songinfo, setSonginfo] = useState(null);
     const thumbRef = useRef();
     const dispatch = useDispatch();
 
@@ -24,11 +23,10 @@ const Player = () => {
             dispatch(actions.setLoadingSong(false));
 
             if (res1.data.err === 0) {
-                setSonginfo(res1.data.data);
+                dispatch(actions.setCurrSongData(res1.data.data));
             }
             if (res2.data.err === 0) {
                 audio.pause();
-                // setAudio(new Audio(res2?.data?.data['128']));
                 dispatch(actions.setAudio(new Audio(res2?.data?.data['128'])));
             } else {
                 audio.pause();
@@ -42,16 +40,12 @@ const Player = () => {
     }, [currSongId]);
 
     return (
-        <div className="fixed bottom-0 right-0 left-0 z-50 flex h-[90px] bg-main-300 px-5 py-[15px] items-center border-t border-main flex-none">
+        <div className="fixed bottom-0 right-0 left-0 z-50 flex h-[90px] bg-main-300 px-5 py-[15px] items-center border-t border-main flex-none select-none">
             <div className="w-[30%] flex flex-auto items-center gap-2">
-                <Info songinfo={songinfo} />
+                <Info />
             </div>
             <div className="w-[40%] flex flex-col gap-2 items-center flex-auto">
-                <MainPlayer
-                    songinfo={songinfo}
-                    thumbRef={thumbRef}
-                    handleStyleProgress={handleStyleProgress}
-                />
+                <MainPlayer thumbRef={thumbRef} handleStyleProgress={handleStyleProgress} />
             </div>
             <div className="w-[30%] flex-auto">
                 <Left />

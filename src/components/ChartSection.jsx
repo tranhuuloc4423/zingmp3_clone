@@ -83,10 +83,12 @@ const ChartSection = () => {
                             const percent = Math.round((song?.score * 100) / chart?.totalScore);
                             const idx = index + 1;
                             return (
-                                <div className="flex items-center w-full bg-[#4d2967] px-[10px] rounded-md hover:bg-[#755989] cursor-pointer">
-                                    <div className={`text-shadow-no-${idx}`}>{idx}</div>
+                                <div
+                                    key={song?.encodeId}
+                                    className="flex items-center w-full bg-[#4d2967] px-4 rounded-md hover:bg-[#755989] cursor-pointer"
+                                >
+                                    <div className={`text-shadow-no-${idx} w-10`}>{idx}</div>
                                     <SongInfo
-                                        key={song?.encodeId}
                                         data={song}
                                         styles={'flex flex-auto gap-[10px] items-center'}
                                     />

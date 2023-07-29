@@ -13,3 +13,4 @@ export { default as SongInfo } from './SongInfo';
 export { default as NewRelease } from './NewRelease';
 export { default as Button } from './Button';
 export { default as ChartSection } from './ChartSection';
+export { default as ChartBanner } from './ChartBanner';

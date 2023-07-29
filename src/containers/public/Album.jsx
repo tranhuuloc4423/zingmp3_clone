@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
-import * as apis from '../../apis';
 import moment from 'moment';
 import { Playlist } from '../../components/';
 import { AudioLoading, SongLoading, Loading } from '../../components/Loading';
@@ -11,25 +10,24 @@ import icons from '../../ultis/icons';
 const { TbPlayerPlayFilled } = icons;
 
 const Album = () => {
-    const { isPlaying, audio, isLoadingSong } = useSelector((state) => state.music);
+    const { isPlaying, audio, isLoadingSong, playlist, currSongId } = useSelector(
+        (state) => state.music
+    );
     const { isLoadingData } = useSelector((state) => state.app);
     const { id } = useParams();
     const location = useLocation();
-    const [playlist, setPlaylist] = useState({});
     const dispatch = useDispatch();
     const follow = Math.floor(playlist?.like / 1000);
 
+    const checkSongInAlbum = playlist?.song?.items?.some((item) => item.encodeId === currSongId);
+
     useEffect(() => {
-        const fetchDataPlaylist = async () => {
+        const getPlaylist = async () => {
             dispatch(actions.setLoadingData(true));
-            const res = await apis.apiGetDetailPlaylist(id);
+            await dispatch(actions.fetchDataPlaylist(id));
             dispatch(actions.setLoadingData(false));
-            if (res?.data.err === 0) {
-                setPlaylist(res?.data?.data);
-                dispatch(actions.setPlaylist(res?.data?.data?.song?.items));
-            }
         };
-        fetchDataPlaylist();
+        getPlaylist();
     }, [id]);
 
     useEffect(() => {
@@ -49,9 +47,8 @@ const Album = () => {
         dispatch(actions.play(false));
         audio.pause();
     };
-    console.log('album page render');
     return (
-        <div className="flex gap-8 w-full h-[80%] mt-[30px] relative">
+        <div className="flex gap-8 w-full h-[80%] mt-[30px] relative px-[59px]">
             {isLoadingData ? (
                 <div className="absolute inset-0 flex items-center justify-center">
                     <Loading />
@@ -60,29 +57,43 @@ const Album = () => {
                 <>
                     <div className="flex-none w-1/4 flex flex-col items-center gap-3">
                         <div
-                            className={`w-full overflow-hidden relative ${
-                                isLoadingSong ? '' : isPlaying ? `rounded-full` : `rounded-lg`
+                            className={`w-full overflow-hidden relative  ${
+                                checkSongInAlbum
+                                    ? isLoadingSong
+                                        ? 'rounded-md'
+                                        : isPlaying
+                                        ? 'rounded-full'
+                                        : 'rounded-md'
+                                    : 'rounded-md'
                             }`}
                         >
                             <img
                                 src={playlist?.thumbnailM}
                                 alt="thumbnail"
                                 className={`w-full object-contain  ${
-                                    isLoadingSong
-                                        ? ''
-                                        : isPlaying
-                                        ? `animate-rotate-center`
-                                        : `animate-rotate-pause`
+                                    checkSongInAlbum
+                                        ? isLoadingSong
+                                            ? ''
+                                            : isPlaying
+                                            ? 'animate-rotate-center'
+                                            : 'animate-rotate-pause'
+                                        : ''
                                 }`}
                             />
                             <div className="inset-0 hover:bg-overlay-300 absolute flex justify-center items-center">
                                 <span className="text-white p-2 border border-white rounded-full cursor-pointer">
-                                    {isLoadingSong ? (
-                                        <SongLoading size={30} />
-                                    ) : isPlaying ? (
-                                        <span onClick={pauseSong}>
-                                            <AudioLoading size={30} />
-                                        </span>
+                                    {checkSongInAlbum ? (
+                                        isLoadingSong ? (
+                                            <SongLoading size={30} />
+                                        ) : isPlaying ? (
+                                            <span onClick={pauseSong}>
+                                                <AudioLoading size={30} />
+                                            </span>
+                                        ) : (
+                                            <span onClick={playSong}>
+                                                <TbPlayerPlayFilled size={30} />
+                                            </span>
+                                        )
                                     ) : (
                                         <span onClick={playSong}>
                                             <TbPlayerPlayFilled size={30} />
@@ -108,10 +119,7 @@ const Album = () => {
                             <span className="text-blur-100">Lời tựa </span>
                             <span className="text-white">{playlist?.sortDescription}</span>
                         </header>
-                        <Playlist
-                            totalDuration={playlist?.song?.totalDuration}
-                            total={playlist?.song?.total}
-                        />
+                        <Playlist />
                     </div>
                 </>
             )}

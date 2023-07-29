@@ -18,6 +18,10 @@
     .media-item {
         @apply flex items-center text-blur-100 text-xs cursor-pointer rounded-md hover:bg-main-0;
     }
+
+    .search-options {
+        @apply text-blur-100 text-sm uppercase hover:text-white font-medium py-4;
+    }
 }
 
 @font-face {

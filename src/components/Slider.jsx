@@ -15,8 +15,8 @@ const Slider = () => {
         let min = 0;
         let max = 2;
         const intervalId = setInterval(() => {
-            const list = getArrSlider(min, max, sliderEls.length - 1);
-            for (let i = 0; i < sliderEls.length; i++) {
+            const list = getArrSlider(min, max, sliderEls?.length - 1);
+            for (let i = 0; i < sliderEls?.length; i++) {
                 sliderEls[i]?.classList.remove(
                     'animate-slide-right',
                     'order-last',
@@ -28,7 +28,6 @@ const Slider = () => {
                     'order-2',
                     'z-10'
                 );
-
                 if (list.some((item) => item === i)) {
                     sliderEls[i].style.cssText = `display: block`;
                 } else {
@@ -45,18 +44,19 @@ const Slider = () => {
                     sliderEls[item]?.classList.add('animate-slide-left2', 'order-2', 'z-20');
                 }
             });
-
-            if (min === sliderEls.length - 1) {
-                min = 0;
-            } else {
-                min += 1;
+            if (sliderEls?.length !== 0) {
+                if (max === sliderEls?.length - 1) {
+                    max = 0;
+                } else {
+                    max += 1;
+                }
+                if (min === sliderEls?.length - 1) {
+                    min = 0;
+                } else {
+                    min += 1;
+                }
             }
-            if (max === sliderEls.length - 1) {
-                max = 0;
-            } else {
-                max += 1;
-            }
-        }, 3000);
+        }, 5000);
         return () => {
             intervalId && clearInterval(intervalId);
         };
@@ -74,7 +74,6 @@ const Slider = () => {
             dispatch(actions.setPlaylist(null));
         }
     };
-
     return (
         <div className="flex justify-between items-center gap-8 w-full overflow-hidden pt-12">
             {banner?.map((item, index) => {

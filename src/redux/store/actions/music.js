@@ -1,5 +1,5 @@
 import actionTypes from './actionTypes';
-// import * as apis from '../../../apis';
+import * as apis from '../../../apis';
 
 export const setCurrSong = (id) => ({
     type: actionTypes.SET_CURR_SONG,
@@ -31,19 +31,61 @@ export const setLoadingSong = (flag) => ({
     flag,
 });
 
-// export const fetchDataPlaylist = (id) => async (dispatch) => {
-//     try {
-//         const res = await apis.apiGetDetailPlaylist(id);
-//         if (res.data.err === 0) {
-//             dispatch({
-//                 type: actionTypes.PLAYLIST,
-//                 playlist: res.data?.data?.items,
-//             });
-//         }
-//     } catch (err) {
-//         dispatch({
-//             type: actionTypes.PLAYLIST,
-//             playlist: null,
-//         });
-//     }
-// };
+export const setCurrSongData = (data) => ({
+    type: actionTypes.SET_CURR_SONG_DATA,
+    data,
+});
+
+export const setRecentSong = (data) => ({
+    type: actionTypes.SET_RECENT_SONGS,
+    data,
+});
+
+export const setRecentAlbum = (data) => ({
+    type: actionTypes.SET_RECENT_ALBUMS,
+    data,
+});
+
+export const deleteRecentPlaylist = (flag) => ({
+    type: actionTypes.DELETE_RECENT_PLAYLIST,
+    flag,
+});
+
+export const search = (keyword) => async (dispatch) => {
+    try {
+        const res = await apis.apiSearch(keyword);
+        if (res.data.err === 0) {
+            dispatch({
+                type: actionTypes.SEARCH_DATA,
+                data: res.data.data,
+            });
+        } else {
+            dispatch({
+                type: actionTypes.SEARCH_DATA,
+                data: null,
+            });
+        }
+    } catch (err) {
+        dispatch({
+            type: actionTypes.SEARCH_DATA,
+            data: null,
+        });
+    }
+};
+
+export const fetchDataPlaylist = (id) => async (dispatch) => {
+    try {
+        const res = await apis.apiGetDetailPlaylist(id);
+        if (res.data.err === 0) {
+            dispatch({
+                type: actionTypes.PLAYLIST,
+                playlist: res?.data?.data,
+            });
+        }
+    } catch (err) {
+        dispatch({
+            type: actionTypes.PLAYLIST,
+            playlist: null,
+        });
+    }
+};

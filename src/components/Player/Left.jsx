@@ -47,7 +47,9 @@ const Left = () => {
                 onChange={(e) => setVolume(e.target.value)}
             />
             <span
-                className="bg-main-100 p-1 rounded-sm hover:bg-zinc-700 cursor-pointer"
+                className={`${
+                    !closeSidebar ? 'bg-hightlight-100' : 'bg-main-100'
+                } p-1 rounded-md hover:brightness-150 cursor-pointer`}
                 onClick={() => dispatch(actions.closeSidebar(!closeSidebar))}
             >
                 <BsMusicNoteList />

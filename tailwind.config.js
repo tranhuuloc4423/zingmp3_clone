@@ -80,6 +80,14 @@ module.exports = {
                         'border-radius': '0',
                     },
                 },
+                appear: {
+                    from: {
+                        opacity: 0,
+                    },
+                    to: {
+                        opacity: 1,
+                    },
+                },
             },
             animation: {
                 'slide-right': 'slide-right 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;',
@@ -89,10 +97,12 @@ module.exports = {
                 'scale-down': 'scale-down 0.75s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;',
                 'rotate-center': 'rotate-center 18s linear infinite both;',
                 'rotate-pause': 'rotate-pause 0.5s ease 1 both;',
+                appear: 'appear 0.75s ease both;',
             },
             colors: {
                 blur: {
                     100: '#ffffff80',
+                    200: '#6D6875',
                 },
                 main: {
                     0: '#2F2739',
