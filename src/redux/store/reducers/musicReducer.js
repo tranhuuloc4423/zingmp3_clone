@@ -11,6 +11,8 @@ const initState = {
     recentSongs: [],
     deleteRecentPlaylist: false,
     searchData: {},
+    searchKeyword: null,
+    searchArtist: null,
 };
 
 const musicReducer = (state = initState, action) => {
@@ -55,7 +57,7 @@ const musicReducer = (state = initState, action) => {
             const songIdentical = songs?.find((item) => item?.encodeId === action.data?.encodeId);
             if (action.data) {
                 if (songIdentical) {
-                    songs = songs?.filter((item) => item != songIdentical);
+                    songs = songs?.filter((item) => item !== songIdentical);
                 }
                 if (songs?.length >= 20) {
                     songs?.pop();
@@ -74,7 +76,14 @@ const musicReducer = (state = initState, action) => {
         case actionTypes.SEARCH_DATA:
             return {
                 ...state,
-                searchData: action.data || {},
+                searchData: action?.data || {},
+                searchKeyword: action?.keyword || '',
+            };
+
+        case actionTypes.SEARCH_DATA_ARTIST:
+            return {
+                ...state,
+                searchArtist: action?.data || null,
             };
         default:
             return state;

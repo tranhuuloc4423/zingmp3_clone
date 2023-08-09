@@ -13,8 +13,8 @@ export const getArrSlider = (start, end, number) => {
     return output;
 };
 
-export const formatSecond = (seconds, form = 'mm:ss') => {
-    return moment.utc(seconds * 1000).format(form);
+export const formatSecond = (seconds) => {
+    return moment.utc(seconds * 1000).format('HH:mm:ss');
 };
 
 export const handleStyleProgress = (ref, value) => {
@@ -30,4 +30,16 @@ export const stringsLimit = (str, max) => {
         }
     }
     return array.length >= max ? `${output}...` : output;
+};
+
+export const formatNumber = (input, numberFixed) => {
+    if (input) {
+        if (input >= 1000000) {
+            return `${(input / 1000000).toFixed(numberFixed)}M`;
+        } else if (input >= 1000) {
+            return `${(input / 1000).toFixed(numberFixed)}K`;
+        } else {
+            return `${input}`;
+        }
+    }
 };

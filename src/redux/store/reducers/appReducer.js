@@ -3,17 +3,18 @@ import actionTypes from '../actions/actionTypes';
 const initState = {
     banner: [],
     recentAlbums: [],
-    hEditorTheme: {},
-    hEditorTheme2: {},
-    hEditorTheme3: {},
-    hEditorTheme4: {},
-    hArtistTheme: {},
+    sections: [],
     newRelease: {},
     weekChart: [],
     closeSidebar: true,
     isLoadingData: false,
     chart: {},
     rank: [],
+    searchHistory: [],
+    scrolltop: true,
+    charthome: null,
+    setTimer: 0,
+    openCountdown: false,
 };
 
 const appReducer = (state = initState, action) => {
@@ -22,16 +23,8 @@ const appReducer = (state = initState, action) => {
             return {
                 ...state,
                 banner: action.homeData?.find((item) => item.sectionId === 'hSlider').items || null,
-                hEditorTheme:
-                    action.homeData?.find((item) => item.sectionId === 'hEditorTheme') || {},
-                hEditorTheme2:
-                    action.homeData?.find((item) => item.sectionId === 'hEditorTheme2') || {},
-                hEditorTheme3:
-                    action.homeData?.find((item) => item.sectionId === 'hEditorTheme3') || {},
-                hEditorTheme4:
-                    action.homeData?.find((item) => item.sectionId === 'hEditorTheme4') || {},
-                hArtistTheme:
-                    action.homeData?.find((item) => item.sectionId === 'hArtistTheme') || {},
+                sections:
+                    action?.homeData?.filter((item) => item.sectionType === 'playlist') || null,
                 newRelease:
                     action.homeData?.find((item) => item.sectionType === 'new-release') || {},
                 weekChart:
@@ -64,6 +57,51 @@ const appReducer = (state = initState, action) => {
             return {
                 ...state,
                 recentAlbums: albums,
+            };
+
+        case actionTypes.SEARCH_HISTORY:
+            let history = state.searchHistory;
+            const historyIdentical = history?.find((item) => item === action.data);
+            if (action.data) {
+                if (historyIdentical) {
+                    history = history?.filter((item) => item !== historyIdentical);
+                }
+                if (history?.length >= 5) {
+                    history?.pop();
+                }
+                history = [action.data, ...history];
+            }
+            console.log(history);
+            return {
+                ...state,
+                searchHistory: history,
+            };
+
+        case actionTypes.SCROLL_TOP:
+            return {
+                ...state,
+                scrolltop: action.flag,
+            };
+
+        case actionTypes.GET_CHART_HOME:
+            return {
+                ...state,
+                charthome: action.charthome || null,
+            };
+        case actionTypes.SET_TIMER:
+            return {
+                ...state,
+                setTimer: action.data || 0,
+            };
+        case actionTypes.TIMER_DEC:
+            return {
+                ...state,
+                setTimer: state.setTimer - 1,
+            };
+        case actionTypes.SET_OPEN_COUNTDOWN:
+            return {
+                ...state,
+                openCountdown: action.flag,
             };
         default:
             return state;

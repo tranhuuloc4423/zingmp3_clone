@@ -9,15 +9,16 @@ import 'moment/locale/vi';
 const { PiMusicNotesSimpleDuotone, TbPlayerPlayFilled, BsThreeDots } = icons;
 
 const MediaItem = ({
-    songData,
+    data,
     width = 'w-full',
     restInfo = { duration: true, albumTitle: true, icon: true },
     prefixInfo,
+    label,
     thumbsize = 'w-10',
     borderBottom = true,
 }) => {
     const { currSongId, audio } = useSelector((state) => state.music);
-    const activeSong = currSongId === songData?.encodeId;
+    const activeSong = currSongId === data?.encodeId;
     const dispatch = useDispatch();
     const checkAlbumTitle = restInfo?.albumTitle && !restInfo?.duration;
     const checkDuration = restInfo?.duration && !restInfo?.albumTitle;
@@ -29,10 +30,10 @@ const MediaItem = ({
             }`}
             onClick={() => {
                 audio.pause();
-                dispatch(actions.setCurrSong(songData?.encodeId));
+                dispatch(actions.setCurrSong(data?.encodeId));
                 dispatch(actions.play(true));
                 dispatch(actions.playAlbum(true));
-                dispatch(actions.setRecentSong(songData));
+                dispatch(actions.setRecentSong(data));
             }}
         >
             <div className="overlay-media inset-0 bg-main-0 absolute hidden items-center rounded-md z-10">
@@ -47,13 +48,19 @@ const MediaItem = ({
                 </span>
             </div>
             {restInfo?.icon && <PiMusicNotesSimpleDuotone size={16} className="mr-2 z-10" />}
-            <SongInfo data={songData} thumbsize={thumbsize} isAlbum prefixInfo={prefixInfo} />
-            {checkAlbumTitle && <div className="grow z-10">{songData?.album?.title}</div>}
-            {checkDuration && <div className="text-right">{formatSecond(songData?.duration)}</div>}
+            <SongInfo
+                data={data}
+                thumbsize={thumbsize}
+                isAlbum
+                prefixInfo={prefixInfo}
+                label={label}
+            />
+            {checkAlbumTitle && <div className="grow z-10">{data?.album?.title}</div>}
+            {checkDuration && <div className="text-right">{formatSecond(data?.duration)}</div>}
             {checkBoth && (
                 <div className="w-1/2 flex items-center">
-                    <div className="grow z-10">{songData?.album?.title}</div>
-                    <div className="text-right">{formatSecond(songData?.duration)}</div>
+                    <div className="grow z-10">{data?.album?.title}</div>
+                    <div className="text-right">{formatSecond(data?.duration)}</div>
                 </div>
             )}
         </div>

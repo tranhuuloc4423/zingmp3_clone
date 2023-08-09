@@ -58,17 +58,20 @@ export const search = (keyword) => async (dispatch) => {
             dispatch({
                 type: actionTypes.SEARCH_DATA,
                 data: res.data.data,
+                keyword,
             });
         } else {
             dispatch({
                 type: actionTypes.SEARCH_DATA,
                 data: null,
+                keyword: '',
             });
         }
     } catch (err) {
         dispatch({
             type: actionTypes.SEARCH_DATA,
             data: null,
+            keyword: '',
         });
     }
 };
@@ -86,6 +89,28 @@ export const fetchDataPlaylist = (id) => async (dispatch) => {
         dispatch({
             type: actionTypes.PLAYLIST,
             playlist: null,
+        });
+    }
+};
+
+export const getArtist = (alias) => async (dispatch) => {
+    try {
+        const res = await apis.apiGetArtist(alias);
+        if (res.data.err === 0) {
+            dispatch({
+                type: actionTypes.SEARCH_DATA_ARTIST,
+                data: res.data.data,
+            });
+        } else {
+            dispatch({
+                type: actionTypes.SEARCH_DATA_ARTIST,
+                data: null,
+            });
+        }
+    } catch (err) {
+        dispatch({
+            type: actionTypes.SEARCH_DATA_ARTIST,
+            data: null,
         });
     }
 };

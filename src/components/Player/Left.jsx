@@ -29,6 +29,7 @@ const Left = () => {
                         }
                     })
                 }
+                className="cursor-pointer"
             >
                 {Number(volume) > 51 ? (
                     <TbVolume />

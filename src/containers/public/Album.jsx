@@ -48,7 +48,7 @@ const Album = () => {
         audio.pause();
     };
     return (
-        <div className="flex gap-8 w-full h-[80%] mt-[30px] relative px-[59px]">
+        <div className="flex gap-8 w-full relative mt-[100px]">
             {isLoadingData ? (
                 <div className="absolute inset-0 flex items-center justify-center">
                     <Loading />

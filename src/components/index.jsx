@@ -14,3 +14,6 @@ export { default as NewRelease } from './NewRelease';
 export { default as Button } from './Button';
 export { default as ChartSection } from './ChartSection';
 export { default as ChartBanner } from './ChartBanner';
+export { default as ArtistItem } from './ArtistItem';
+export { default as ChartDiagram } from './ChartDiagram';
+export { default as WeekChartSection } from './WeekChartSection';

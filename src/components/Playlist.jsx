@@ -20,9 +20,9 @@ const Playlist = () => {
                 <div className="grow">Album</div>
                 <div>Thời gian</div>
             </header>
-            <Scrollbars autoHide style={{ width: '100%', height: '80%' }} className="pr-2">
+            <Scrollbars autoHide style={{ width: '100%', height: '100%' }} className="pr-2">
                 {song?.items.map((item) => (
-                    <MediaItem key={item?.encodeId} songData={item} isAlbum />
+                    <MediaItem key={item?.encodeId} data={item} isAlbum />
                 ))}
             </Scrollbars>
 

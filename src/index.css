@@ -33,6 +33,10 @@
     display: flex;
 }
 
+.parentRelative .overlay {
+    display: block;
+}
+
 .zingchart {
     background: radial-gradient(50% 124.93% at 95.86% -10%, #3efad9 0, hsla(0, 0%, 100%, 0) 100%),
         linear-gradient(91.56deg, #ff9357 1.54%, #9100ff 98.71%);
@@ -44,22 +48,29 @@
 .text-shadow-no-1 {
     -webkit-text-fill-color: transparent;
     -webkit-text-stroke-width: 1px;
-    font-size: 48px;
+    font-size: 36px;
     color: #4a90e2;
 }
 
 .text-shadow-no-2 {
     -webkit-text-fill-color: transparent;
     -webkit-text-stroke-width: 1px;
-    font-size: 48px;
+    font-size: 36px;
     color: #27bd9c;
 }
 
 .text-shadow-no-3 {
     -webkit-text-fill-color: transparent;
     -webkit-text-stroke-width: 1px;
-    font-size: 48px;
+    font-size: 36px;
     color: #e35050;
+}
+
+.text-shadow {
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke-width: 1px;
+    font-size: 36px;
+    color: white;
 }
 
 .media-item:hover .media-item-play {
@@ -82,6 +93,37 @@
         rgba(192, 108, 132, 1) 50%,
         rgba(53, 92, 125, 1) 100%
     );
+}
+
+.bg-gradient-singer {
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.01),
+        rgba(0, 0, 0, 0.3) 50%,
+        rgba(20, 11, 18, 0.8)
+    );
+}
+
+.bg-gradient-singer-top {
+    background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.01),
+        rgba(0, 0, 0, 0.3) 50%,
+        rgba(20, 11, 18, 0.8)
+    );
+}
+
+.bg-gradient-singer-overlay {
+    background: linear-gradient(
+        to top right,
+        rgba(41, 21, 71, 0.3),
+        rgba(60, 35, 98, 0.5) 50%,
+        rgba(53, 24, 97, 0.8)
+    );
+}
+
+.bg-gradient-singer-overlay-default {
+    background: rgba(0, 0, 0, 0.1);
 }
 
 input[type='range'] {

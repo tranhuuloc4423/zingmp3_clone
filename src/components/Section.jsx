@@ -1,35 +1,37 @@
 import React, { memo } from 'react';
 import { SectionItem, MediaItem } from './';
 
-const Section = ({ data, title, child = 'sectionItem', childStyles, children }) => {
+const Section = ({
+    data,
+    title,
+    child = 'sectionItem',
+    childStyles,
+    children,
+    childNum = 5,
+    childTitle,
+    media = { ablumbTitle: true },
+}) => {
     return (
-        <div className="mt-12 flex flex-col gap-5 w-full">
+        <div className="mt-8 flex flex-col gap-5 w-full">
             <div className="flex items-center justify-between">
                 <h3 className="text-xl text-white font-bold">{title}</h3>
                 <span className="text-blur-100">Tất cả</span>
             </div>
-            <div className={`${childStyles ? childStyles : 'flex items-start gap-6'}`}>
-                {/* {data?.map((item, index) => {
-                    if (index < 5) {
-                        switch (child) {
-                            case 'media':
-                                return (
-                                    <MediaItem
-                                        key={item?.encodeId}
-                                        songData={item}
-                                        width={'w-[48%]'}
-                                        restInfo={{ albumTitle: true }}
-                                    />
-                                );
-                            default:
-                                return <SectionItem key={item?.encodeId} data={item} />;
-                        }
-                    }
-                })} */}
+            <div className={`flex items-start mx-[-16px] ${childStyles ? childStyles : ''}`}>
                 {child === 'sectionItem' &&
                     data?.map((item, index) => {
-                        if (index < 5) {
-                            return <SectionItem key={item?.encodeId} data={item} />;
+                        if (index < childNum) {
+                            if (childTitle) {
+                                return (
+                                    <SectionItem
+                                        key={item?.encodeId}
+                                        data={item}
+                                        title={childTitle}
+                                    />
+                                );
+                            } else {
+                                return <SectionItem key={item?.encodeId} data={item} />;
+                            }
                         }
                     })}
                 {child === 'media' &&
@@ -38,9 +40,9 @@ const Section = ({ data, title, child = 'sectionItem', childStyles, children }) 
                             return (
                                 <MediaItem
                                     key={item?.encodeId}
-                                    songData={item}
+                                    data={item}
                                     width={'w-[48%]'}
-                                    restInfo={{ albumTitle: true }}
+                                    restInfo={media}
                                 />
                             );
                         }

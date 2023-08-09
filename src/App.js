@@ -1,5 +1,6 @@
 import { Home, Public, Login, Album, WeekRank, ZingChart } from './containers/public/';
-import { SearchMain, SearchSongs, SearchAll } from './components/Search/';
+import { SingerMain } from './components/Singer';
+import { SearchMain, SearchSongs, SearchAll, SearchPlaylist } from './components/Search/';
 import { Routes, Route } from 'react-router-dom';
 import paths from './ultis/paths';
 import { useEffect } from 'react';
@@ -19,6 +20,8 @@ const {
     SEARCH,
     ALL,
     SONG,
+    PLAYLIST,
+    HOME__SINGER,
 } = paths;
 
 function App() {
@@ -38,9 +41,11 @@ function App() {
                         <Route path={PLAYLIST__TITLE__ID} element={<Album />} />
                         <Route path={WEEKRANK__TITLE_ID} element={<WeekRank />} />
                         <Route path={ZING__CHART} element={<ZingChart />} />
+                        <Route path={HOME__SINGER} element={<SingerMain />} />
                         <Route path={SEARCH} element={<SearchMain />}>
                             <Route path={ALL} element={<SearchAll />} />
                             <Route path={SONG} element={<SearchSongs />} />
+                            <Route path={PLAYLIST} element={<SearchPlaylist />} />
                         </Route>
                     </Route>
                 </Routes>

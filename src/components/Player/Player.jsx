@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import * as apis from '../../apis/';
@@ -7,11 +7,36 @@ import { handleStyleProgress } from '../../ultis/fn';
 import Info from './Info';
 import Left from './Left';
 import MainPlayer from './MainPlayer';
+import icons from '../../ultis/icons';
+import { formatSecond } from '../../ultis/fn';
+
+const { IoClose } = icons;
 
 const Player = () => {
     const { currSongId, audio } = useSelector((state) => state.music);
+    const { setTimer, openCountdown } = useSelector((state) => state.app);
     const thumbRef = useRef();
+    const intervalId = useRef();
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        if (setTimer > 0) {
+            dispatch(actions.setOpenCountdown(true));
+            intervalId.current = setInterval(() => {
+                console.log(setTimer);
+                if (setTimer > 0) {
+                    if (setTimer === 1) {
+                        console.log('pause');
+                        dispatch(actions.setOpenCountdown(false));
+                        clearTimeout(intervalId.current);
+                        audio.pause();
+                    }
+                    dispatch(actions.setTimerDec());
+                }
+            }, 1000);
+        }
+        return () => intervalId.current && clearTimeout(intervalId.current);
+    }, [setTimer]);
 
     useEffect(() => {
         const fetchDetailSong = async () => {
@@ -41,6 +66,26 @@ const Player = () => {
 
     return (
         <div className="fixed bottom-0 right-0 left-0 z-50 flex h-[90px] bg-main-300 px-5 py-[15px] items-center border-t border-main flex-none select-none">
+            {openCountdown && (
+                <div
+                    className={`absolute top-0 left-1/2 translate-x-[-50%] translate-y-[-100%] bg-hightlight-100 rounded-t-md p-3 text-sm text-white flex items-center gap-2 z-50`}
+                >
+                    <span>Nhạc sẽ dừng sau: </span>
+                    <span className="font-bold">{setTimer && formatSecond(setTimer)}</span>
+                    <span
+                        className={`cursor-pointer`}
+                        onClick={() => {
+                            if (intervalId) {
+                                clearTimeout(intervalId.current);
+                                dispatch(actions.setTimer(0));
+                                dispatch(actions.setOpenCountdown(false));
+                            }
+                        }}
+                    >
+                        <IoClose size={24} />
+                    </span>
+                </div>
+            )}
             <div className="w-[30%] flex flex-auto items-center gap-2">
                 <Info />
             </div>

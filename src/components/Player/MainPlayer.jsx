@@ -111,6 +111,7 @@ const MainPlayer = ({ thumbRef }) => {
                 <span
                     onClick={handlePrevSong}
                     className={`${!playlistSong ? 'text-gray-500' : 'hover-icon'}`}
+                    title="Bài hát trước đó"
                 >
                     <MdSkipPrevious size={24} />
                 </span>
@@ -124,17 +125,20 @@ const MainPlayer = ({ thumbRef }) => {
                         <BsFillPauseFill
                             size={24}
                             className="hover:text-hightlight-100 text-white"
+                            title="dừng chơi nhạc"
                         />
                     ) : (
                         <TbPlayerPlayFilled
                             size={24}
                             className="hover:text-hightlight-100 text-white"
+                            title="chơi nhạc"
                         />
                     )}
                 </span>
                 <span
                     onClick={handleNextSong}
                     className={`${!playlistSong ? 'text-gray-500' : 'hover-icon'}`}
+                    title="Bài hát tiếp theo"
                 >
                     <MdSkipNext size={24} />
                 </span>

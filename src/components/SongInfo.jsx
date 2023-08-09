@@ -18,6 +18,7 @@ const SongInfo = ({
     styles,
     bgActive = 'bg-main-0',
     prefixInfo,
+    label,
 }) => {
     const { thumbnail, title, artistsNames, encodeId } = data;
     const { isPlaying, currSongId, audio, isLoadingSong } = useSelector((state) => state.music);
@@ -38,6 +39,7 @@ const SongInfo = ({
             } ${!isAlbum && 'p-[10px]'}`}
             onClick={handleClick}
         >
+            {prefixInfo}
             <div
                 className={`rounded-sm overflow-hidden flex justify-center items-center relative ${
                     thumbsize ? thumbsize : 'w-[60px]'
@@ -57,7 +59,7 @@ const SongInfo = ({
                 </span>
             </div>
             <div className="flex flex-col gap-1">
-                {prefixInfo && <span className="text-xs text-blur-100">{prefixInfo}</span>}
+                {label && <span className="text-xs text-blur-100">{label}</span>}
                 <h5 className="text-white text-sm font-semibold">
                     {title && stringsLimit(title, 6)}
                 </h5>

@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 
 const { AiFillHeart, AiOutlineHeart, GoPlay, BsThreeDots } = icons;
 
-const SectionItem = ({ data, recent }) => {
+const SectionItem = ({ data, title }) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [hover, setHover] = useState(false);
@@ -24,7 +24,7 @@ const SectionItem = ({ data, recent }) => {
         imgRef.current.classList.add('animate-scale-down');
     };
     return (
-        <div className="flex flex-col gap-2 w-1/5">
+        <div className={`flex flex-col w-1/5 p-4`}>
             <div
                 className="section-item relative overflow-hidden rounded-md cursor-pointer"
                 onMouseEnter={handleHoverEnter}
@@ -58,12 +58,12 @@ const SectionItem = ({ data, recent }) => {
                 )}
                 <img ref={imgRef} src={data?.thumbnailM} alt="thumbnail" className="w-full" />
             </div>
-            {recent ? (
-                <div className="text-white text-sm font-bold">
+            {title ? (
+                <div className="text-white text-sm font-bold mt-3">
                     {data?.title && stringsLimit(data?.title, 8)}
                 </div>
             ) : (
-                <p className="text-blur-100 text-sm mt-2">
+                <p className="text-blur-100 text-sm mt-3">
                     {data?.sortDescription && stringsLimit(data?.sortDescription, 10)}
                 </p>
             )}

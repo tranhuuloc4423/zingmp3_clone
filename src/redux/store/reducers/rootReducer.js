@@ -19,7 +19,7 @@ const musicConfig = {
 const homeConfig = {
     ...commonConfig,
     key: 'app',
-    whitelist: ['recentAlbums', 'closeSidebar'],
+    whitelist: ['recentAlbums', 'closeSidebar', 'searchHistory', 'charthome'],
 };
 
 const rootReducer = combineReducers({

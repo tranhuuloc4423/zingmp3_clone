@@ -1,12 +1,18 @@
-import React from 'react';
+import { memo } from 'react';
 import icons from '../ultis/icons';
 import { Search } from './';
+import { useSelector } from 'react-redux';
 
 const { HiArrowLongRight, HiArrowLongLeft } = icons;
 
 const Header = () => {
+    const { scrolltop } = useSelector((state) => state.app);
     return (
-        <div className="h-[70px] py-[10px] flex items-center justify-between w-full gap-8 bg-[#170f23cc] px-[59px]">
+        <div
+            className={`fixed z-50 h-[70px] py-[10px] flex items-center justify-between gap-8 px-[60px] w-full ${
+                scrolltop ? 'bg-transparent' : 'bg-main-200'
+            }`}
+        >
             <div className="flex items-center flex-1 gap-4">
                 <div className="flex items-center gap-6 text-gray-500">
                     <HiArrowLongLeft size={24} />
@@ -21,4 +27,4 @@ const Header = () => {
     );
 };
 
-export default Header;
+export default memo(Header);
